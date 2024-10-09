@@ -25,6 +25,6 @@ options:
  
 substitutions:
   _IMAGE_NAME: tem-image
-  _SHORT_SHA: v1
+  _SHORT_SHA: v2
   _PROJECT_ID: glb-fs-wgh-app-dev
 
