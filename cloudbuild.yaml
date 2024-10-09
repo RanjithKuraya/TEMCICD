@@ -5,19 +5,11 @@ steps:
 
 # Step 2: Build the Docker image with an auto-generated tag using SHORT_SHA
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
+  args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
 
-
-# Echo the image name before pushing
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args: ['-c', 'echo "Pushing image: europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}"']
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['images']
 # Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${SHORT_SHA}']
+  args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}']
 
 # Step 4: Update the Kubernetes deployment to use the newly built Docker image with the tag SHORT_SHA
 #- name: 'gcr.io/cloud-builders/kubectl'
@@ -31,16 +23,15 @@ steps:
 #  env:
 #  - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
 #  - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
-
+    
 options:
   logging: CLOUD_LOGGING_ONLY  # Or use NONE if you don't want any logging.
 
- # Substitutions for the project and image name
+# Substitutions for the project and image name
 substitutions:
-  _IMAGE_NAME: 'tem-image'
+  _IMAGE_NAME: 'image'
   _PROJECT_ID: 'glb-fs-wgh-app-dev'
-  _REPOSITORY_NAME: TEMCICD
 
 # Specify the Docker image with the SHORT_SHA tag
 images:
-  - 'gcr.io/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${SHORT_SHA}'
+  - 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}'
