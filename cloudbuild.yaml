@@ -7,7 +7,10 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}']
-  
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['tag','gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}' ] 
+
+
 #- name: 'gcr.io/cloud-builders/kubectl'
 #  args: [
 #    'set',
