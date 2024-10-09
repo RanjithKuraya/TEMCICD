@@ -4,8 +4,7 @@ steps:
   args: ['clone', 'https://github.com/RanjithKuraya/TEMCICD.git']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: [
-    'build',   '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}','TEMCICD'] # Ensure that this points to the directory containing the Dockerfile
+  args: ['build',   '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}','TEMCICD'] # Ensure that this points to the directory containing the Dockerfile
   
 
 - name: 'gcr.io/cloud-builders/docker'
