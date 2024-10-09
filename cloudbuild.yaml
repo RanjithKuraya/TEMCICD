@@ -5,24 +5,14 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [
-    'build',
-    '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}',
-    'TEMCICD'  # Ensure that this points to the directory containing the Dockerfile
-  ]
+    'build',   '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}','TEMCICD'] # Ensure that this points to the directory containing the Dockerfile
+  
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: [
-    'push',
-    'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}'
-  ]
+  args: ['push','gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}']
 
 # Push to Artifact Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: [
-    'tag',
-    'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}',  # Tag for Artifact Registry
-    'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}'
-  ]
+- name: 'gcr.io/cloud-builders/docker'args: ['tag', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [
