@@ -5,7 +5,7 @@ steps:
 
 # Step 2: Build the Docker image with an auto-generated tag using SHORT_SHA
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', './TEMCICD/']
+  args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', '.']
 
 # Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
