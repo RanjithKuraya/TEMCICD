@@ -3,7 +3,7 @@ steps:
   args: ['clone', 'https://github.com/RanjithKuraya/TEMCICD.git']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', 'TEMCICD']
+  args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', './TEMCICD/']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}']
@@ -29,6 +29,6 @@ options:
  
 substitutions:
   _IMAGE_NAME: tem-image
-  _SHORT_SHA: v1
+  _SHORT_SHA: v2
   _PROJECT_ID: glb-fs-wgh-app-dev
 
