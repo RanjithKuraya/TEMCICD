@@ -34,4 +34,4 @@ substitutions:
 
 # Specify the Docker image with the SHORT_SHA tag
 images:
-  - 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}'
+  - 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}'
