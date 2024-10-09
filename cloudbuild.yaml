@@ -6,7 +6,7 @@ steps:
   args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}', 'TEMCICD']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}']
+  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}']
   
 #- name: 'gcr.io/cloud-builders/kubectl'
 #  args: [
