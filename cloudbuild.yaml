@@ -7,19 +7,26 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', 'TEMCICD']
 
+# Attempt to push to GCR
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['images']
+  args: [
+    'push',
+    'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}'  # Ensure this matches the build tag
+  ]
 
+# Push to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'tag',
     'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}',  # Tag for Artifact Registry
-    'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}'
+    'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}'
   ]
 
-# Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}']
+  args: [
+    'push',
+    'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_SHORT_SHA}'
+  ]
 
 # Step 4: Update the Kubernetes deployment to use the newly built Docker image with the tag SHORT_SHA
 #- name: 'gcr.io/cloud-builders/kubectl'
@@ -41,6 +48,7 @@ options:
 substitutions:
   _IMAGE_NAME: 'tem-image'
   _PROJECT_ID: 'glb-fs-wgh-app-dev'
+  _REPOSITORY_NAME: 'TEMCICD'
 
 # Specify the Docker image with the SHORT_SHA tag
 images:
