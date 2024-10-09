@@ -7,6 +7,9 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
 
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['images']
+
 # Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}']
