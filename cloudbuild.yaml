@@ -8,7 +8,9 @@ steps:
   args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
 
 
-- name: 'gcr.io/cloud-builders/bash'
+# Echo the image name before pushing
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
   args: ['-c', 'echo "Pushing image: europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${_SHORT_SHA}"']
 
 - name: 'gcr.io/cloud-builders/docker'
