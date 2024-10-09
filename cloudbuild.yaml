@@ -29,6 +29,6 @@ options:
 
 # Substitutions for the project and image name
 substitutions:
-  _IMAGE_NAME: 'gke-image'
+  _IMAGE_NAME: 'cicdtem'
   _PROJECT_ID: 'glb-fs-wgh-app-dev'
   _SHORT_SHA: 'v1'
