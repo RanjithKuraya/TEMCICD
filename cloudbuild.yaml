@@ -9,7 +9,7 @@ steps:
 
 # Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:$_SHORT_SHA']
+  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:$_SHORT_SHA']
 
 # Step 4: Update the Kubernetes deployment to use the newly built Docker image with the tag SHORT_SHA
 #- name: 'gcr.io/cloud-builders/kubectl'
@@ -32,3 +32,4 @@ substitutions:
   _IMAGE_NAME: 'cicdtem'
   _PROJECT_ID: 'glb-fs-wgh-app-dev'
   _SHORT_SHA: 'v1'
+  _REPO_NAME: 'cicdtem'
