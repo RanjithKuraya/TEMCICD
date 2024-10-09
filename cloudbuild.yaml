@@ -5,13 +5,13 @@ steps:
 
 # Step 2: Build the Docker image with an auto-generated tag using SHORT_SHA
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
+  args: ['build', '-t', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}', './TEMCICD/']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['images']
 # Step 3: Push the Docker image to the container registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}']
+  args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}']
 
 # Step 4: Update the Kubernetes deployment to use the newly built Docker image with the tag SHORT_SHA
 #- name: 'gcr.io/cloud-builders/kubectl'
