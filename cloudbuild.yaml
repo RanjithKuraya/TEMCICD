@@ -12,17 +12,17 @@ steps:
   args: ['push', 'europe-west3-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:$_SHORT_SHA']
 
 # Step 4: Update the Kubernetes deployment to use the newly built Docker image with the tag SHORT_SHA
-#- name: 'gcr.io/cloud-builders/kubectl'
-#  args: [
-#    'set',
-#    'image',
-#    'deployment',
-#    'cicd-deploy',
-#    'gke-image-sha256-1=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${SHORT_SHA}'
-#    ]
-#  env:
-#  - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
-#  - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [
+    'set',
+    'image',
+    'deployment',
+    'cicd-deploy',
+    'cicdtem-sha256-1=gcr.io/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:$_SHORT_SHA'
+    ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-deploy'
     
 options:
   logging: CLOUD_LOGGING_ONLY  # Or use NONE if you don't want any logging.
