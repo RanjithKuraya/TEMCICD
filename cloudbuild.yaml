@@ -17,7 +17,7 @@ steps:
     'set',
     'image',
     'deployment',
-    'cicd-deploy1',
+    'deployment-1',
     'cicdtem-sha256-1=gcr.io/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:$_SHORT_SHA'
     ]
   env:
